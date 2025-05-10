@@ -1,6 +1,8 @@
 # ESP32 OLED New Year
 
-B站投稿视频 [`我用ESP32+0.96寸OLED摆烂了你的AE作业`](https://www.bilibili.com/video/BV1ai4y197u9/) 的程序源码
+一个基于 ESP32 的简单视频播放器, 利用 SPIFFS 文件系统存储视频文件 ([`data/video.data`](./data/video.data)), 并通过 OLED 显示屏播放.
+
+![demo](./doc/image/demo.gif)
 
 ## 硬件说明
 
@@ -10,13 +12,13 @@ B站投稿视频 [`我用ESP32+0.96寸OLED摆烂了你的AE作业`](https://www.
 
 ## 烧录说明
 
-1. 安装 [`Arduino IDE`](https://www.arduino.cc/en/software/) (Legacy IDE 1.8.X)
+1. 安装 [`Arduino IDE`](https://www.arduino.cc/en/software/)
 
-2. 安装 [`Arduino ESP32 filesystem uploader`](https://github.com/me-no-dev/arduino-esp32fs-plugin) 插件 (注意: 该插件不能在 Arduino IDE 2.X 上使用)
+2. 安装 [`Arduino ESP32 filesystem uploader`](https://github.com/me-no-dev/arduino-esp32fs-plugin) 插件 (注意: 该插件不能在 Arduino IDE 2.X 上使用, 若使用 Arduino IDE 2.X 请查看 [`arduino-spiffs-upload`]( https://github.com/xtools-at/arduino-spiffs-upload/))
 
 3. 使用 [`Arduino IDE`](https://www.arduino.cc/en/software/) 打开 [`esp32_oled_video_player.ino`](./esp32_oled_video_player.ino)
 
-4. 按下 `Ctrl + Shift + I` 打开 `库管理器`, 搜索并安装 [`ESP8266 and ESP32 OLED driver for SSD1306 displays`](https://github.com/ThingPulse/esp8266-oled-ssd1306/) 库
+4. 按下 `Ctrl + Shift + I` 打开 `库管理器`, 搜索并安装 [`u8g2`](https://github.com/olikraus/u8g2/wiki/u8g2install) 库
 
    ![install_lib](./doc/image/install_lib.png)
 
@@ -32,17 +34,15 @@ B站投稿视频 [`我用ESP32+0.96寸OLED摆烂了你的AE作业`](https://www.
 
    ![upload](./doc/image/upload.png)
    
-8. 上传 [`data/video.bin`](./data/video.bin) 到 `SPIFFS` 文件系统
+8. 上传 [`data/video.data`](./data/video.data) 到 `SPIFFS` 文件系统
 
    ![upload_data_folder](./doc/image/upload_data_folder.png)
 
 ## 其他说明
 
-[`data/video.bin`](./data/video.bin)  是 `图像序列` 的 `字模文件`, 创建流程如下: 
+- [`data/video.data`](./data/video.data)  是 `视频文件`, 需要通过 [`converter.py`](./converter.py) 创建
 
-1. 使用 `Adobe Premiere Pro` 等视频剪辑软件将 `视频` 导出为 `图像序列`
-
-2. 使用 [`converter.py`](./converter.py) 将 `图像序列` 转换为 `data/video.bin`
+- [`converter.py`](./converter.py) 支持输入 `视频` 或 `Adobe Premiere Pro` 等视频剪辑软件导出的 `图像序列`
 
    ![converter](./doc/image/converter.png)
     
@@ -53,3 +53,7 @@ B站投稿视频 [`我用ESP32+0.96寸OLED摆烂了你的AE作业`](https://www.
 - [arduino-esp32fs-plugin](https://github.com/me-no-dev/arduino-esp32fs-plugin)
 
 - [esp8266-oled-ssd1306](https://github.com/ThingPulse/esp8266-oled-ssd1306/)
+
+- [u8g2](https://github.com/olikraus/u8g2/)
+
+- [arduino-spiffs-upload]( https://github.com/xtools-at/arduino-spiffs-upload/)
